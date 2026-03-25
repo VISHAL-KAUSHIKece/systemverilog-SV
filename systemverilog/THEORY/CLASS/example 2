@@ -1,0 +1,38 @@
+/* Write a SystemVerilog program with the following:
+
+Base Class: packet
+rand bit [7:0] addr
+Constraint:
+addr inside {[10:20]}
+Derived Class: packet_ext (extends packet)
+Override the constraint such that:
+addr inside {[30:40]}
+Testbench:
+Create object of derived class
+Randomize it 5 times
+Print values
+*/
+
+class packet;
+rand bit [7:0]addr;
+constraint c1{ addr = $urandom_range(10,20)};
+function void display()
+$display("addr=%0d",addr);
+endfunction
+
+class packet_ext;
+constraint c2 { addr = $urandom_range(30,40)};
+function void display()
+$display("addr=%0d",addr);
+endfunction
+endclass
+endclass
+
+module Testbench;
+packet p1;
+p1 = new();
+repeat(5)
+ begin
+ p1.display
+ end
+endmodule

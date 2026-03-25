@@ -1,0 +1,76 @@
+Write a SystemVerilog function that:
+
+🔹 Requirements
+Takes an array of integers as input
+Returns:
+1 → if the array has more even numbers
+-1 → if the array has more odd numbers
+0 → if both are equal
+🔹 Testbench Task
+Create an array with random values (size 10)
+Call the function
+Display:
+Array values
+Count of even & odd numbers
+Final result
+💡 Example
+
+Input Array:
+{2, 5, 8, 7, 6}
+
+Even count: 3
+Odd count: 2
+
+Output: 1 (more evens)
+
+🎯 Bonus Challenge
+Modify the function to return both counts using output arguments
+Or make it generic (works with dynamic arrays)
+
+
+// start
+
+module compare_module;
+int a[10];
+
+function int compare(input int a[10]);
+int even = 0 ;
+int odd = 0 ;
+for (int i =0;i<10;i++) begin
+if(a[i]%2==0) 
+even++;
+else
+odd++;  
+end
+if (even > odd)
+return 1;
+else if (even < odd)
+return -1;
+else
+return 0;
+endfunction         
+
+initial begin
+int count;
+  
+foreach (a[i]) begin
+  a[i] = $urandom_range(0,100);
+$display("a[%0d] = %0d", i, a[i]);
+end
+
+count = compare(a);
+if (count == 1) begin
+
+$display("Output: 1 (more evens)");
+end
+else if (count == -1) begin
+              
+$display("Output: -1 (more odds)");
+end
+else begin
+
+$display("Output: 0 (equal evens and odds)");
+end
+end
+endmodule
+

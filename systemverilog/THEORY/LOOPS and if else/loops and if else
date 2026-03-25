@@ -1,0 +1,62 @@
+//IF-ELSE statements
+
+module if_else;
+int a,b;
+initial begin
+repeat(5) begin 
+a = $urandom_range(5, 20);
+$display("a=%0d",a);
+b = $urandom_range(5, 20);
+$display("b=%0d",b);
+if(a>b) begin
+$display("a is greater than b");    
+end
+else if(a<b) begin
+$display("a is less than b");    
+end
+else begin
+$display("a is equal to b");        
+end
+end
+end
+endmodule
+
+//WHILE LOOP
+
+module while_loop;  // first check then exicute
+int i;
+initial begin
+while (i<10) begin
+$display("i=%0d",i);
+i++;
+end
+end
+endmodule   
+
+//DO WHILE LOOP
+
+module do_while_loop; // after giving output for i=0 then check the condition and then execute the loop
+int i;
+initial begin
+do begin
+$display("i=%0d",i);
+i++;
+end while (i<10);
+end
+endmodule   
+
+//FOREVER LOOP
+
+module forever_loop; // infinite loop
+int i;
+initial begin
+forever begin
+$display("i=%0d",i);
+i++;
+if(i==10) break; // to break the infinite loop
+end
+end
+endmodule   
+
+//FOR LOOP
+

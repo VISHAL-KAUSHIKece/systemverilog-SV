@@ -1,0 +1,29 @@
+/* Write a SystemVerilog function that takes an array of 8 integers as input and returns the sum of all odd numbers in the array */
+
+module eg;
+int a[8];
+
+function automatic int odd_sum(input int a[8]);
+int sum = 0 ; 
+
+ foreach (a[j])
+  begin
+  if(a[j]%2 !=0)
+  sum += a[j];
+  end
+
+  return sum;
+endfunction
+
+initial 
+begin 
+  int result;
+  foreach(a[i])
+   begin
+     a[i] = $urandom_range(1,10);
+     $display("a[%0d] = %0d",i, a[i]);
+   end
+  result = odd_sum(a);
+  $display("sum = %0d",result);
+end
+endmodule 

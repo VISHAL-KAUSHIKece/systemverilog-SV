@@ -1,0 +1,36 @@
+/* Write a SystemVerilog class Packet with the following:
+
+Requirements:
+Declare:
+rand bit [7:0] addr
+rand bit [7:0] data
+Add constraints:
+addr should be even
+data should be greater than addr
+Add a display() method
+In testbench:
+Create object
+Randomize it 5 times using repeat
+Print values each time
+*/
+
+class packet;
+rand bit[7:0]addr;  
+rand bit[7:0]data;
+constraint c1 {addr % 2 == 0;} // addr should be even
+constraint c2 {data > addr;} // data should be greater than addr    
+task display();
+$display("Address: %0d, Data: %0d", addr, data);
+endtask
+endclass    
+module testbench;
+initial begin
+packet p1;
+p1 = new();
+repeat(5) begin
+p1.randomize();
+p1.display();
+end
+end
+endmodule
+    

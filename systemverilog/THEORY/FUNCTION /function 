@@ -1,0 +1,75 @@
+//FUNCTION  A function that does not consume simulation time, returns a single value or an expression, and may or may not take arguments.
+
+// Style 1
+function <return_type> <function_name> (<port_list>);
+ ...
+ return <value or expression>
+endfunction
+
+// Style 2
+function <return_type> <function_name> ();
+  input <port_list>;
+  inout <port_list>;
+  output <port_list>;
+  ...
+  return <value or expression>
+endfunction
+
+// Example
+
+module function_example;
+  function compare(input int a, b);
+    if (a > b) begin
+      $display("a is greater than b");
+    end
+    else if (a < b) begin
+        $display("a is less than b");
+    end
+    else begin
+        $display("a is equal to b");
+    end
+  endfunction
+
+  initial begin
+   compare(5, 3); // Output: a is greater than b
+   compare(2, 4); // Output: a is less than b
+   compare(7, 7); // Output: a is equal to b        
+  end
+endmodule
+
+// EXAMPLE 2
+
+module function_example;
+  function compare(input int a, b);
+    if (a > b) begin
+      return 1;
+    end
+    else if (a < b) begin
+        return 2;
+    end
+    else begin
+        return 0;
+    end
+  endfunction
+  initial begin
+    
+    repeat(5)
+      begin
+    int data;
+    int a,b;
+  a= $urandom_range(0, 10); 
+  b= $urandom_range(0, 10);
+        $display("a=%0d,b=%0d",a,b);
+    data = compare(a, b);
+    if (data == 1) begin
+      $display("a is greater than b");
+    end
+    else if (data == 2) begin
+        $display("a is less than b");
+    end
+    else begin
+        $display("a is equal to b");
+    end
+      end
+  end
+endmodule

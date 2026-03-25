@@ -1,0 +1,30 @@
+/* Question:
+Write a SystemVerilog function that takes an array of 8 integers as input and returns the maximum value present in the array. */
+
+
+module max_no;
+int a[8];
+
+  function automatic int max_fn(input int a[8]);
+int max_value = a[0];
+foreach(a[j])
+begin
+
+  if(max_value < a[j])
+    max_value = a[j];
+ end
+
+return max_value;
+endfunction
+
+initial begin 
+int result;
+foreach(a[i])
+begin
+a[i] = $urandom_range(0,100);
+$display("The value of a[%0d] is: %0d", i, a[i]);
+end
+result = max_fn(a);
+$display("The maximum value in the array is: %0d", result);
+end
+endmodule

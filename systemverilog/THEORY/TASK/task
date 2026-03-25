@@ -1,0 +1,55 @@
+/*TASK  A task that may or may not consume simulation time, returns values as output or inout argument type, and may or may not take arguments.*/
+
+
+
+// Style 1
+task <task_name> (input <port_list>, inout <port_list>, output <port_list>);
+ ...
+endtask
+
+// Style 2
+task <task_name> ();
+  input <port_list>;
+  inout <port_list>;
+  output <port_list>;
+  ...
+endtask
+
+
+// EXAMPLE 
+/*Write a SystemVerilog task that takes an array of 8 integers as input and:
+
+Displays all the elements of the array
+Calculates and displays the sum of even numbers
+Calculates and displays the count of odd numbers*/
+module eg;
+int a[8];
+
+  task sum_count(input int a[8],output int sum,output int count);
+ count = 0 ;
+ sum = 0 ;
+
+foreach(a[j])
+  begin
+  if(a[j] % 2 == 0)
+  sum += a[j];
+  else 
+  count++;
+end 
+endtask
+
+
+initial begin
+int sum,count;
+  foreach(a[i])
+  begin
+  a[i] = $urandom_range(1,9);
+  $display("a[%0d] = %0d",i,a[i]);
+  end
+  sum_count(a,sum,count);
+  $display("sum of even no = %0d \n count of odd no = %0d",sum ,count);
+
+end
+endmodule
+
+

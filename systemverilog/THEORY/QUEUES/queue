@@ -1,0 +1,95 @@
+// QUEUE
+
+module eg;
+string volleyball_players[$];  
+initial begin
+ $display ("no. of players=%0d",volleyball_players.size());  // print the size of queue
+
+volleyball_players = {"vishal","piyush","nitin"};  // add the value in queue
+
+ $display ("no. of players=%0d",volleyball_players.size());  // print the value of queue  
+ foreach (volleyball_players[i])  $display ("player[%0d]=%s",i,volleyball_players[i]);  // print the value of queue
+
+ volleyball_players.insert(1,"shailu");  // insert the value in queue
+ volleyball_players.insert(3,"kartik");  // insert the value in queue
+ volleyball_players.insert(5,"pappu");  // insert the value in queue
+$display ("no. of players=%0d",volleyball_players.size());  // print the value of queue  
+ foreach (volleyball_players[i])  $display ("player[%0d]=%s",i,volleyball_players[i]);  // print the value of queue
+
+volleyball_players.delete(5);  // delete the value from queue
+$display ("no. of players=%0d",volleyball_players.size());  // print the value of queue  
+ foreach (volleyball_players[i])  $display ("player[%0d]=%s",i,volleyball_players[i]);  // print the value of queue
+
+volleyball_players.push_back("pawan");  // push the value in queue
+$display ("no. of players=%0d",volleyball_players.size());  // print the value of queue  
+ foreach (volleyball_players[i])  $display ("player[%0d]=%s",i,volleyball_players[i]);  // print the value of queue
+
+volleyball_players.pop_back();  // pop the value from queue
+$display ("no. of players=%0d",volleyball_players.size());  // print the value of queue  
+ foreach (volleyball_players[i])  $display ("player[%0d]=%s",i,volleyball_players[i]);  // print the value of queue         
+
+ volleyball_players.push_front("pawan");  // push the value in queue
+$display ("no. of players=%0d",volleyball_players.size());  // print the value of queue  
+ foreach (volleyball_players[i])  $display ("player[%0d]=%s",i,volleyball_players[i]);  // print the value of queue
+
+ volleyball_players.pop_front();  // pop the value from queue
+$display ("no. of players=%0d",volleyball_players.size());  // print the value of queue  
+ foreach (volleyball_players[i])  $display ("player[%0d]=%s",i,volleyball_players[i]);  // print the value of queue
+ZXWQ2
+end
+endmodule
+
+
+OUTPUT
+
+# KERNEL: no. of players=0
+
+# KERNEL: no. of players=3
+# KERNEL: player[0]=vishal
+# KERNEL: player[1]=piyush
+# KERNEL: player[2]=nitin
+
+# KERNEL: no. of players=6
+# KERNEL: player[0]=vishal
+# KERNEL: player[1]=shailu
+# KERNEL: player[2]=piyush
+# KERNEL: player[3]=kartik
+# KERNEL: player[4]=nitin
+# KERNEL: player[5]=pappu
+
+# KERNEL: no. of players=5
+# KERNEL: player[0]=vishal
+# KERNEL: player[1]=shailu
+# KERNEL: player[2]=piyush
+# KERNEL: player[3]=kartik
+# KERNEL: player[4]=nitin
+
+# KERNEL: no. of players=6
+# KERNEL: player[0]=vishal
+# KERNEL: player[1]=shailu
+# KERNEL: player[2]=piyush
+# KERNEL: player[3]=kartik
+# KERNEL: player[4]=nitin
+# KERNEL: player[5]=pawan
+
+# KERNEL: no. of players=5
+# KERNEL: player[0]=vishal
+# KERNEL: player[1]=shailu
+# KERNEL: player[2]=piyush
+# KERNEL: player[3]=kartik
+# KERNEL: player[4]=nitin
+
+# KERNEL: no. of players=6
+# KERNEL: player[0]=pawan
+# KERNEL: player[1]=vishal
+# KERNEL: player[2]=shailu
+# KERNEL: player[3]=piyush
+# KERNEL: player[4]=kartik
+# KERNEL: player[5]=nitin
+
+# KERNEL: no. of players=5
+# KERNEL: player[0]=vishal
+# KERNEL: player[1]=shailu
+# KERNEL: player[2]=piyush
+# KERNEL: player[3]=kartik
+# KERNEL: player[4]=nitin

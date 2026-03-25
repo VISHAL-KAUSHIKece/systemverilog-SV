@@ -1,0 +1,63 @@
+
+/* CLASS
+
+class <class_name>;
+  <data members>  // class properties
+
+  // class methods
+  function <function_name>;
+  . . .
+  endfunction
+
+  task<task_name>;
+  . . .
+  endtask
+endclass
+
+
+
+
+// Question
+
+Write a SystemVerilog class Packet with the following requirements:
+
+It should have:
+rand bit [7:0] addr
+rand bit [7:0] data
+Add a constraint such that:
+addr is always between 10 and 20
+Include a display() method to print values
+In a testbench:
+Create an object
+Randomize it
+Print the value
+*/
+
+class packet;
+rand bit[7:0]addr;
+rand bit[7:0]data;
+
+function void f_n(input bit [7:0] m_addr, bit [7:0] m_data);
+data = m_data;
+addr= m_addr;
+endfunction
+task display();
+$display("Address: %0d, Data: %0d", addr, data);
+endtask
+endclass
+module testbench;
+initial begin
+packet p1;
+bit [7:0] addr, data;
+p1 = new();
+addr = $urandom_range(10,20);
+data = $urandom_range(0,255);
+
+p1.f_n(addr, data);
+p1.display();
+end 
+
+endmodule
+
+
+

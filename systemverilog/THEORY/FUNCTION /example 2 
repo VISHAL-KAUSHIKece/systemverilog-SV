@@ -1,0 +1,39 @@
+/* 1. Even Sum Function
+
+Write a SystemVerilog function that:
+
+Takes an array of integers as input
+Returns the sum of all even numbers in the array */
+
+module even_sum;
+  parameter i=10;
+int a[i];
+
+function int add_even(input int a[i]);
+ output int sum = 0;
+foreach(a[i])
+begin
+
+  if(a[i]%2 == 0)begin
+    sum = a[i];
+    sum = sum + sum;
+return 1;
+  end
+else
+ return 0;
+end
+endfunction
+ initial begin
+int  count;
+foreach(a[i])
+a[i] = $urandom_range(0,10);
+   count = add_even(a);
+if(count ==1)
+  $display("The sum of even numbers in the array is: %0d", sum);
+else
+ $display("There are no even numbers in the array.");
+end
+endmodule
+
+
+

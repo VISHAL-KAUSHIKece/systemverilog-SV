@@ -1,0 +1,175 @@
+// SINGLE DIMMENSIONAL ARRAYS
+
+module eg;
+int a[5] = '{1,2,3,4,5};
+initial 
+  begin
+    foreach (a[i]) 
+        begin
+        $display ("a[i] =%0d", i, a[i]);
+        end
+   end
+endmodule
+
+
+// TWO DIMENSIONAL ARRAY
+
+module eg;
+int a[5][2] = '{'{1,101},'{2,102},'{3,103},'{4,104},'{5,105}};
+initial 
+  begin
+    foreach (a[i][j]) 
+        begin
+        $display ("a[%0d][%0d] =%0d", i, j, a[i][j]);
+        end
+   end
+endmodule
+
+
+// THREE DIMENSIONAL ARRAYS
+
+module eg;
+int a[5][3][2] = '{
+                   '{'{1,101},'{2,102},'{3,103} },      // 5*3*2= 30 
+                   '{'{4,201},'{5,201},'{6,201} },
+                   '{'{7,301},'{8,302},'{9,303} },
+                   '{'{10,401},'{11,401},'{12,401} },
+                   '{'{13,501},'{14,501},'{15,501} }
+                  };
+                
+initial 
+  begin
+    foreach (a[i,j,k]) 
+        begin
+        $display ("a[%0d][%0d][%0d] =%0d", i, j,k, a[i][j][k]);
+        end
+   end
+endmodule
+
+
+// DYNAMIC ARRAY   * Function int size(), function void delete(), new[ ] *
+
+module eg;
+int a[];
+
+initial begin
+
+a = new[3];
+a = '{1,2,3};
+
+foreach (a[i])  $display ("a[%0d]=%0d",i,a[i]);  // print the value
+
+     $display ("a size is =%0d",a.size()); // size of array 
+
+
+     a = new[5](a);   // Function int size()    privious values of "a" are also present
+     $display ("a size is =%0d",a.size());  
+  
+foreach (a[i])  $display ("a[%0d]=%0d",i,a[i]);  // print the new value for a[5] including previous values and new values are 0s
+
+
+     a = new[7];  // new[ ] 
+    $display ("a size is =%0d",a.size());  
+  
+foreach (a[i])  $display ("a[%0d]=%0d",i,a[i]);  // all the values will be 0 
+
+    a.delete();  // function void delete()
+    $display ("a size is =%0d",a.size());   // size if a become  0 
+
+end
+endmodule
+  
+ OUTPUT
+
+ a[0]=1
+ a[1]=2
+ a[2]=3
+ a size is =3
+ a size is =5
+ a[0]=1
+ a[1]=2
+ a[2]=3
+ a[3]=0
+ a[4]=0
+ a size is =7
+ a[0]=0
+ a[1]=0
+ a[2]=0
+ a[3]=0
+ a[4]=0
+ a[5]=0
+ a[6]=0
+ a size is =0
+
+
+// ASSOCIATIVE ARRAYS  
+
+module eg;
+typedef enum {red, green, yellow} tra_light;
+bit [2:0] a[tra_light];
+
+initial begin 
+a[red] = 3'b001;
+a[green] = 3'b010;
+a[yellow] = 3'b100;
+
+foreach (a[i])
+$display ("a[%0s] = %0d", i. name() , a[i]);
+end 
+endmodule
+
+OUTPUT 
+
+a[red] = 1
+a[green] = 2
+a[yellow] = 4
+
+
+module eg;
+   bit [7:0] array [int];
+   int index;
+  
+  initial begin
+    
+    array[5] = 2;
+    array[10] = 4;
+    array[7] = 6;
+    array[9] = 8;
+    array[20] = 10;
+    array[13] = 12;
+    
+  
+    foreach (array[i]) $display("array[%0d] = %0d", i, array[i]);
+    
+    
+    $display("size = %0d, Number of entries = %0d of array", array.size(), array.num());
+    
+    if(array.exists(7)) $display("An element exists at index = 7");
+    else $display("An element doesn't exists at index = 7");
+    
+    if(array.exists(8)) $display("An element exists at index = 8");
+    else $display("An element doesn't exists at index = 8");
+    
+    array.first(index);
+    $display("First index of array = %0d", index);
+    
+    array.last(index);
+    $display("Last index of array = %0d", index);
+    
+    index = 9;
+    array.prev(index);  // Previous index of 9
+    $display("Prev index of 9 is %0d", index);
+    
+    index = 10;
+    array.next(index); // Next index of 10
+    $display("Next index of 10 is %0d", index);
+    
+    array.delete(7);
+    $display("After deleting element having index 7");
+    foreach (array[i]) $display("array[%0d] = %0d", i, array[i]);
+    
+    array.delete();
+    $display("size = %0d of array", array.size());
+  end
+endmodule
+
