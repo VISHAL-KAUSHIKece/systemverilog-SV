@@ -1,1 +1,92 @@
-djdke
+/*
+Design question for system verilog 
+
+Here is a good SystemVerilog RTL Design Interview Question often asked for freshers and junior RTL engineers:
+
+Question
+Design a parameterized synchronous FIFO in SystemVerilog.
+
+Requirements:
+
+FIFO depth should be configurable using a parameter.
+
+Data width should be configurable using a parameter.
+
+Inputs:
+
+clk
+
+rst_n
+
+wr_en
+
+rd_en
+
+wr_data
+
+Outputs:
+
+rd_data
+
+full
+
+empty
+
+Handle simultaneous read and write.
+
+Generate full and empty flags correctly.
+
+Use circular buffer implementation
+*/
+
+
+module fifo #(
+   parameter data_width = 8, data_depth =16;
+)(
+  input logic clk;
+  input logic rst_n;
+  input logic wr_en;
+  input logic rd_en;
+  input logic [data_width-1:0]wr_data;
+  output logic [data_width-1:0]rd_data;
+  output logic full;
+  output logic empty
+  );
+localparam ADDR_WIDTH = $clog2(DEPTH);
+
+logic [data_width-1:0] mem[data_depth-1:0];
+
+// bit for full/empty detection 
+logic [add_width-1:0]wr_ptr,rd_ptr;
+
+//write logic 
+
+always_ff ( posedge clg or negedge rst_n )
+begin 
+
+if(!rst_n)begin 
+wr_ptr <=0;
+end
+
+else if( wr_en && ! full) begin
+mem[wr_ptr[add_width-1:0] <= wr_data;
+wr_ptr <= wr_ptr + 1'b1;
+end
+
+end
+
+// read logic 
+always_ff ( posedge clg or negedge rst_n )
+begin 
+ if(!rst_n)begin 
+ rd_ptr <= 0;
+ rd_data <=0;
+ end
+else if 
+
+
+
+
+
+
+
