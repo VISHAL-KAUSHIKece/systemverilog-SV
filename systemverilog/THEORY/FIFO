@@ -42,8 +42,7 @@ Use circular buffer implementation
 
 module fifo #(
    parameter data_width = 8, data_depth =16
-);
-(
+)(
   input logic clk,
   input logic rst_n,
   input logic wr_en,
@@ -53,7 +52,7 @@ module fifo #(
   output logic full,
   output logic empty
   );
-localparam ADDR_WIDTH = $clog2(DEPTH);
+localparam add_width = $clog2(data_depth);
 
 logic [data_width-1:0] mem[data_depth-1:0];
 
