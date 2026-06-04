@@ -82,7 +82,12 @@ begin
  rd_ptr <= 0;
  rd_data <=0;
  end
-else if 
+else if (rd_en && !empty)begin
+ rd_data <= mem[rd_ptr[add_width-1:0]];
+ rd_ptr <= rd_ptr +1'b1;
+ end
+end
+endmodule 
 
 
 
